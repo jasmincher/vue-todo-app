@@ -1,8 +1,10 @@
 <template>
   <div>
-    <TodoInput @keyup.enter="add" />
-    <button @click="add" id="add-item-btn">Submit</button>
-
+    <h3>What do you need to do today?</h3>
+    <div class="input-container">
+      <TodoInput @keyup.enter="add" />
+      <button @click="add" id="add-item-btn">Submit</button>
+    </div>
     <ul>
       <TodoItem
         v-for="item in tasks"
@@ -11,8 +13,7 @@
         v-model="newTask"
         @deleteTask="deleteTask(item)"
         @click="toggleDone(item)"
-        :strikethrough="{ done: item.isDone }"
-        :check="[item.isDone ? 'checked' : 'unchecked']"
+        :check="item.isDone"
       />
     </ul>
   </div>
@@ -39,7 +40,7 @@ export default {
     };
   },
   methods: {
-    //function that will create a new tasks based on the input the user types in 
+    //function that will create a new tasks based on the input the user types in
     add() {
       let taskValue = document.getElementById("todo-input").value;
 
@@ -54,14 +55,13 @@ export default {
         });
       }
 
-
       //setting the input to blank after user creates a task
       document.getElementById("todo-input").value = "";
     },
 
     //function will delete the task that is clicked on
     deleteTask(item) {
-      // in order to delete an item, tasks array will now be filtered 
+      // in order to delete an item, tasks array will now be filtered
       //without the item that is chosen
       this.tasks = this.tasks.filter((newTask) => newTask.id !== item.id);
     },
@@ -92,32 +92,8 @@ export default {
 #add-item-btn {
 }
 
-.done {
-  text-decoration: line-through;
-}
-
-.unchecked {
-  position: absolute;
-  left: 10px;
-  font-size: 30px;
-  color: gray;
-  font-weight: bolder;
-}
-
-.unchecked:hover {
-  color: rgb(124, 189, 124);
-}
-
-.checked {
-  color: rgb(124, 189, 124);
-  position: absolute;
-  left: 10px;
-  font-size: 30px;
-  font-weight: bolder;
-}
-
-li,
-li button {
-  cursor: pointer;
+.input-container {
+  display: flex;
+  justify-content: center;
 }
 </style>
