@@ -1,7 +1,7 @@
 <template>
   <li>
-    <span class="material-icons" :class="check">done</span>
-    <p :class="strikethrough">
+    <span class="material-icons" :class="check ? 'checked' : 'unchecked'">done</span>
+    <p :class="{done: check } ">
       {{ task }}
     </p>
     <button @click="deleteTask" class="delete-btn">Delete</button>
@@ -14,7 +14,6 @@ export default {
   props: {
     task: String,
     check: String,
-    strikethrough: String,
   },
   methods: {
       //this will allow us to use the deleteTask function in 
@@ -41,6 +40,13 @@ li {
   border-radius: 5px;
 }
 
+
+li,
+li button {
+  cursor: pointer;
+}
+
+
 .delete-btn {
   position: absolute;
   right: 0;
@@ -53,5 +59,30 @@ li {
 
 .delete-btn:hover {
   background: rgb(230, 108, 108);
+}
+
+.unchecked {
+  position: absolute;
+  left: 10px;
+  font-size: 30px;
+  color: gray;
+  font-weight: bolder;
+}
+
+.unchecked:hover {
+  color: rgb(124, 189, 124);
+}
+
+
+.done {
+  text-decoration: line-through;
+}
+
+.checked {
+  color: rgb(124, 189, 124);
+  position: absolute;
+  left: 10px;
+  font-size: 30px;
+  font-weight: bolder;
 }
 </style>
