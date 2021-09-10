@@ -1,6 +1,5 @@
 <template>
   <div>
-    <label> What do you need to do today? </label>
     <input type="text" id="todo-input" />
 
    
